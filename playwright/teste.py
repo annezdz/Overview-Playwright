@@ -98,29 +98,29 @@ print('---------------------------------------------------------')
 
 print('---------------------------------------------------------')
 
-with sync_playwright() as p:
-    browser: Browser = p.chromium.launch(headless=False)
-    page: Page = browser.new_page(
-        base_url='https://selenium.dunossauro.live/'
-    )
-    page.goto("todo_list.html")
-    page.locator('#todo-name').fill('Fazer Line #222')
-    page.locator('#todo-desc').fill('Live com Playwright')
-    page.locator('#todo-submit').click()
-    page.locator('.btn.btn-primary.btn-ghost.do').click()
-    card = page.locator('.terminal-card')
-    title = card.locator('header')
-    desc = card.locator('.description')
-    expect(title).to_have_text('Fazer Line #222')
-    expect(desc).to_have_text('Live com Playwright')
-    expect(title).to_have_text(re.compile('.*Line.*'))
-    # expect(title).not_to_have_text(re.compile('.*Line.*'))
-    expect(page).to_have_title('Todo list')
-
-    request = p.request.new_context()
-    response = request.get('https://selenium.dunossauro.live/todo_list.html')
-    expect(response).to_be_ok()
-    page.screenshot(path='result.png', full_page=True)
-
-    time.sleep(2)
-    browser.close()
+# with sync_playwright() as p:
+#     browser: Browser = p.chromium.launch(headless=False)
+#     page: Page = browser.new_page(
+#         base_url='https://selenium.dunossauro.live/'
+#     )
+#     page.goto("todo_list.html")
+#     page.locator('#todo-name').fill('Fazer Line #222')
+#     page.locator('#todo-desc').fill('Live com Playwright')
+#     page.locator('#todo-submit').click()
+#     page.locator('.btn.btn-primary.btn-ghost.do').click()
+#     card = page.locator('.terminal-card')
+#     title = card.locator('header')
+#     desc = card.locator('.description')
+#     expect(title).to_have_text('Fazer Line #222')
+#     expect(desc).to_have_text('Live com Playwright')
+#     expect(title).to_have_text(re.compile('.*Line.*'))
+#     # expect(title).not_to_have_text(re.compile('.*Line.*'))
+#     expect(page).to_have_title('Todo list')
+#
+#     request = p.request.new_context()
+#     response = request.get('https://selenium.dunossauro.live/todo_list.html')
+#     expect(response).to_be_ok()
+#     page.screenshot(path='result.png', full_page=True)
+#
+#     time.sleep(2)
+#     browser.close()
